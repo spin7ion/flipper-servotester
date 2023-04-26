@@ -160,20 +160,18 @@ int32_t servotester_app(void* p) {
             }
         } else if(event.type == EventTypeTick) {
             if(mode == Auto) {
-                if (dir) pWidthNew += WIDTH_STEP_AUTO;
-                else pWidthNew -= WIDTH_STEP_AUTO;
+                if (dir) {
+                    pWidthNew += WIDTH_STEP_AUTO;
+                } else {
+                    pWidthNew -= WIDTH_STEP_AUTO;
+                }
+
+                if (pWidthNew == MIN_WIDTH || pWidthNew == MAX_WIDTH) dir = !dir;
             }
         }
 
-        if (pWidthNew < MIN_WIDTH) {
-            pWidthNew = MIN_WIDTH;
-            dir = true;
-        }
-
-        if (pWidthNew > MAX_WIDTH) {
-            pWidthNew = MAX_WIDTH;
-            dir = false;
-        }
+        if (pWidthNew < MIN_WIDTH) pWidthNew = MIN_WIDTH;
+        if (pWidthNew > MAX_WIDTH) pWidthNew = MAX_WIDTH;
 
         if (pWidthNew != pWidth) {
             pWidth = pWidthNew;
