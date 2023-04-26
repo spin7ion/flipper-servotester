@@ -181,8 +181,10 @@ int32_t servotester_app(void* p) {
         }
     }
 
-    furi_hal_power_disable_otg();
+    // first stop PWM on component
     furi_hal_pwm_stop(FuriHalPwmOutputIdTim1PA7);
+    // second power off component
+    furi_hal_power_disable_otg();
 
     furi_timer_free(timer);
     furi_message_queue_free(event_queue);
