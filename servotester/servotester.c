@@ -162,11 +162,11 @@ int32_t servotester_app(void* p) {
             if(mode == Auto) {
                 if (dir) {
                     pWidthNew += WIDTH_STEP_AUTO;
+                    if (pWidthNew >= MAX_WIDTH) dir = false;
                 } else {
                     pWidthNew -= WIDTH_STEP_AUTO;
+                    if (pWidthNew <= MIN_WIDTH) dir = true;
                 }
-
-                if (pWidthNew == MIN_WIDTH || pWidthNew == MAX_WIDTH) dir = !dir;
             }
         }
 
